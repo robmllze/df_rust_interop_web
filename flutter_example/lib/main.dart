@@ -88,7 +88,8 @@ String getString(WebAssembly webAssembly, int ptr, int len) {
 }
 
 void main() async {
-  final result = await loadJSArrayBufferFromURL('assets/rust_functions/pkg/rust_functions_bg.wasm');
+  final result = await loadJSArrayBufferFromURL(
+      'assets/rust_functions/pkg/rust_functions_bg.wasm');
   final jsArrayBuffer = result.buffer!;
 
   final imports = JSObject();
@@ -127,7 +128,8 @@ void main() async {
     numbers.add(a);
   }.jsify();
 
-  final webAssembly = await WebAssembly.instantiate(jsArrayBuffer, imports).toDart;
+  final webAssembly =
+      await WebAssembly.instantiate(jsArrayBuffer, imports).toDart;
 
   // Retrieve the exports
   final exports = webAssembly.instance.exports.dartify() as Map;
@@ -184,7 +186,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

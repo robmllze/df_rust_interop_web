@@ -15,8 +15,10 @@ import 'package:http/http.dart' as http;
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-Future<({JSArrayBuffer? buffer, http.Response response})> loadJSArrayBufferFromURL(
-    String uri) async {
+Future<({JSArrayBuffer? buffer, http.Response response})>
+    loadJSArrayBufferFromURL(
+  String uri,
+) async {
   final response = await http.get(Uri.parse(uri));
   if (response.statusCode != 200) {
     return (buffer: null, response: response);
