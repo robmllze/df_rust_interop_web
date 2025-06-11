@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:js_interop';
 import 'dart:js_interop_unsafe';
 import 'dart:typed_data';
@@ -75,6 +77,7 @@ ByteBuffer _byteBuffer(WebAssembly webAssembly) {
   return byteBuffer;
 }
 
+// ignore: unused_element
 Uint8List _uint8List(WebAssembly webAssembly) {
   final byteBuffer = _byteBuffer(webAssembly);
   final bytes = byteBuffer.asUint8List(_ptr, _len);
@@ -88,8 +91,7 @@ String getString(WebAssembly webAssembly, int ptr, int len) {
 }
 
 void main() async {
-  final result = await loadJSArrayBufferFromURL(
-      'assets/rust_functions/pkg/rust_functions_bg.wasm');
+  final result = await loadJSArrayBufferFromURL('assets/rust_functions/pkg/rust_functions_bg.wasm');
   final jsArrayBuffer = result.buffer!;
 
   final imports = JSObject();
@@ -128,8 +130,7 @@ void main() async {
     numbers.add(a);
   }.jsify();
 
-  final webAssembly =
-      await WebAssembly.instantiate(jsArrayBuffer, imports).toDart;
+  final webAssembly = await WebAssembly.instantiate(jsArrayBuffer, imports).toDart;
 
   // Retrieve the exports
   final exports = webAssembly.instance.exports.dartify() as Map;
@@ -147,6 +148,7 @@ void main() async {
 
   // Call the hello_world function
   numbers.clear();
+  // ignore: unused_local_variable
   final returnTwoInts = exports['return_two_ints']();
   // print(numbers);
 
